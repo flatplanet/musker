@@ -2,6 +2,22 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
+# create meep model
+class Meep(models.Model):
+	user = models.ForeignKey(
+		User, related_name="meeps", 
+		on_delete=models.DO_NOTHING
+		)
+	body = models.CharField(max_length=200)
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return(
+			f"{self.user} "
+			f"({self.created_at:%Y-%m-%d %H:%M}): "
+			f"{self.body}..."
+			)
+
 
 # Create A User Profile Model
 class Profile(models.Model):
