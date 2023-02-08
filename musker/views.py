@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Profile, Meep
 from .forms import MeepForm
+from django.contrib.auth import authenticate, login, logout
+
 
 def home(request):
 	if request.user.is_authenticated:
@@ -54,3 +56,27 @@ def profile(request, pk):
 	else:
 		messages.success(request, ("You Must Be Logged In To View This Page..."))
 		return redirect('home')		
+
+
+
+def login_user(request):
+	if request.method == "POST":
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request, user)
+			messages.success(request, ("You Have Been Logged In!  Get MEEPING!"))
+			return redirect('home')
+		else:
+			messages.success(request, ("There was an error logging in. Please Try Again..."))
+			return redirect('login')
+
+	else:
+		return render(request, "login.html", {})
+
+
+def logout_user(request):
+	logout(request)
+	messages.success(request, ("You Have Been Logged Out. Sorry to Meep You Go..."))
+	return redirect('home')
