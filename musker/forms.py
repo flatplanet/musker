@@ -1,8 +1,16 @@
 from django import forms
-from .models import Meep
+from .models import Meep, Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
+# Profile Extras Form
+class ProfilePicForm(forms.ModelForm):
+	profile_image = forms.ImageField(label="Profile Picture")
+
+	class Meta:
+		model = Profile
+		fields = ('profile_image', )
 
 class MeepForm(forms.ModelForm):
 	body = forms.CharField(required=True, 
