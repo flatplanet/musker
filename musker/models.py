@@ -10,6 +10,14 @@ class Meep(models.Model):
 		)
 	body = models.CharField(max_length=200)
 	created_at = models.DateTimeField(auto_now_add=True)
+	likes = models.ManyToManyField(User, related_name="meep_like", blank=True)
+
+
+	# Keep track or count of likes
+	def number_of_likes(self):
+		return self.likes.count()
+
+
 
 	def __str__(self):
 		return(

@@ -25,7 +25,7 @@ class MeepForm(forms.ModelForm):
 
 	class Meta:
 		model = Meep
-		exclude = ("user",)
+		exclude = ("user", "likes",)
 
 
 class SignUpForm(UserCreationForm):
