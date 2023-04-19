@@ -34,9 +34,9 @@
 			  		- {{ meep.number_of_likes }} Likes -
 			  		
 			  		{% if user in meep.likes.all %}
-				  	  <a href="{% url 'meep_like' meep.id %}">UnLike</a>
+				  	  <a href="{% url 'meep_like' meep.id %}"><i class="fa-solid fa-heart" style='color:red'></i></a>
 				  	{% else %}
-				  		<a href="{% url 'meep_like' meep.id %}">Like</a>
+				  		<a href="{% url 'meep_like' meep.id %}"><i class="fa fa-heart-o" style="color:red"></i></a>
 				  	{% endif %}
 
 
