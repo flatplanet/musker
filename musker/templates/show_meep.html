@@ -8,9 +8,9 @@
 			<div class="col-8">
 
 
-	<h1>Meeps!</h1>
+	
 <br/>
-	{% for meep in meeps %}
+	
 		<div class="alert alert-dark" role="alert">
 <div class="container">
 	<div class="row">
@@ -28,21 +28,17 @@
 		  <small class="text-muted">
 		  	({{ meep.created_at}}) By 
 		  	@{{ meep.user.username }}
-		  	&nbsp;&nbsp;
-		  	{{ meep.number_of_likes }}  
+		  	- {{ meep.number_of_likes }} Likes - 
 
 		  	{% if user in meep.likes.all %}
 		  	  <a href="{% url 'meep_like' meep.id %}">
-	<i class="fa-solid fa-heart" style="color:red"></i></a>
+	<i class="fa-solid fa-heart" style="color:red"></i>
+		  	  </a>
 		  	{% else %}
 		  		<a href="{% url 'meep_like' meep.id %}">
-		  <i class="fa fa-heart-o" style="color:red"></i></a>
+		  <i class="fa fa-heart-o" style="color:red"></i>
+		  		</a>
 		  	{% endif %}
-		  	&nbsp;&nbsp;
-		  	<a href="{% url 'meep_show' meep.id %}">
-	<i class="fa-solid fa-share" style="color:gray"></i>
-		  	</a>
-		  	
 
 		  </small>
 		</div><br/><br/>
@@ -50,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-	{% endfor %}
+	
 
 </div>
 
