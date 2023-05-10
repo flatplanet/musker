@@ -1,3 +1,4 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">Musker</a>
@@ -12,10 +13,6 @@
           href="{% url 'profile_list' %}">Profile List</a>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" 
-          href="{% url 'profile' request.user.id %}">My Profile</a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" 
           href="{% url 'logout' %}">Logout</a>
@@ -33,10 +30,28 @@
         
         
       </ul>
-      <form class="d-flex" role="search">
+
+      {% if user.is_authenticated %}
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-link navbar-brand">
+            <a href="{% url 'profile' request.user.id %}">
+{% if user.profile.profile_image %}
+<img src="{{ user.profile.profile_image.url }}" class="rounded-circle" width=30>
+{% else %}
+    <img src="{% static 'images/default_profile_pic.png' %}" class="img-fluid rounded-circle" alt="Profile Image" width=30>
+
+{% endif %}
+            </a>
+            
+          </li>
+        </ul>
+      {% endif %}
+
+      <!--<form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form>-->
+
     </div>
   </div>
 </nav>
