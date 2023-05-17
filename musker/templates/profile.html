@@ -99,7 +99,11 @@
     
     <p class="card-text">
     		{% for following in profile.follows.all %}
-				<a href="{% url 'profile' following.user.id %}">@{{ following }}</a><br/>
+				<a href="{% url 'profile' following.user.id %}">@{{ following }}</a> 
+	<a href="{% url 'unfollow' following.user.id %}">
+	<i class="fa fa-undo small" style="color:gray"></i>
+</a>
+<br/>
 
 			{% endfor %}
 
