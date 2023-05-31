@@ -96,6 +96,17 @@ def profile(request, pk):
 		messages.success(request, ("You Must Be Logged In To View This Page..."))
 		return redirect('home')		
 
+def followers(request, pk):
+	if request.user.is_authenticated:
+		if request.user.id == pk:
+			profiles = Profile.objects.get(user_id=pk)
+			return render(request, 'followers.html', {"profiles":profiles})
+		else:
+			messages.success(request, ("That's Not Your Profile Page..."))
+			return redirect('home')	
+	else:
+		messages.success(request, ("You Must Be Logged In To View This Page..."))
+		return redirect('home')
 
 
 def login_user(request):
