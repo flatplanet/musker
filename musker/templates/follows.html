@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<h1>{{ request.user.username }} is Following...</h1>
+<br/>
+
+{% if profiles %}
+
+	{% for profile in profiles.follows.all %}
+
+		<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      {% if profile.profile_image %}
+      <img src="{{ profile.profile_image.url }}" width=200 height=200 class="img-fluid rounded-start" alt="{{profile.user.username}}">
+      {% else %}
+
+      <img src="{% static 'images/default_profile_pic.png' %}" class="img-fluid rounded-start" alt="Profile Image">
+
+      {% endif %}
+
+      
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ profile.user.username }}
+        {% if profile in profiles.follows.all %}
+<a href="{% url 'unfollow' profile.user.id %}">
+<i class="fa fa-user-minus small" style="color:gray"></i>
+  </a>
+           {% else %}
+ <a href="{% url 'follow' profile.user.id %}">
+ <i class="fa fa-user-plus small" style="color:gray"></i>
+  </a>
+           {% endif %}
+
+        </h5>
+        <p class="card-text"><a href="{% url 'profile' profile.user.id %}">@{{ profile.user.username|lower }}</a></p>
+        <br/><br/>
+        <p class="card-text"><small class="text-muted">Last Updated: {{ profile.date_modified }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+<br/><br/>
+
+
+
+	{% endfor %}
+
+{% endif %}
+
+
+{% endblock %}
