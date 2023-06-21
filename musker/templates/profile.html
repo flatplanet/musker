@@ -46,6 +46,8 @@
 {% if request.user.username == profile.user.username %}
 		  	&nbsp;&nbsp;
 <a href="{% url 'delete_meep' meep.id %}"><i class="fa fa-trash" style="color:gray"></i></a>
+		&nbsp;&nbsp;
+<a href="{% url 'edit_meep' meep.id %}"><i class="fa fa-edit" style="color:gray"></i></a>
 {% endif %}
 				  	
 

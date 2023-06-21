@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-8">
+
+
+	
+<br/>
+	
+		<div class="alert alert-dark" role="alert">
+<div class="container">
+	<div class="row">
+		<div class="col-1">
+		  {% if meep.user.profile.profile_image %}
+				<img src="{{ meep.user.profile.profile_image.url }}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">
+
+				{% else %}
+				<img src="{% static 'images/default_profile_pic.png' %}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">	
+				{% endif %}
+		</div>
+
+		<div class="col-11">
+		  {{ meep.body }}<br/>
+		  <small class="text-muted">
+		  	({{ meep.created_at}}) By 
+		  	@{{ meep.user.username }}
+		  	- {{ meep.number_of_likes }} Likes - 
+
+		  	{% if user in meep.likes.all %}
+		  	  <a href="{% url 'meep_like' meep.id %}">
+	<i class="fa-solid fa-heart" style="color:red"></i>
+		  	  </a>
+		  	{% else %}
+		  		<a href="{% url 'meep_like' meep.id %}">
+		  <i class="fa fa-heart-o" style="color:red"></i>
+		  		</a>
+		  	{% endif %}
+
+		  </small>
+		</div><br/><br/>
+	
+			</div>
+		</div>
+	</div>
+	
+
+
+
+
+				<br/><br/><br/>
+{% if form %}
+<form  method=POST>
+	{% csrf_token %}
+  	{{ form.as_p }}
+
+
+  <button type="submit" class="btn btn-secondary">Edit Meep!</button>
+</form>
+{% endif %}
+</div>
+
+{% endblock %}
